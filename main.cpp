@@ -4,10 +4,10 @@
 class element
 {
 public:
-    virtual void update_state();
+    void update_state();
 };
 
-class buffer : element {
+class buffer : public element {
 private:
     int capacity{0};
     int rate{0};
@@ -27,7 +27,7 @@ public:
         return size;
     }
 
-    void update_state override
+    void update_state()
     {
         action_ready = true;
     }
@@ -35,7 +35,7 @@ public:
 
 };
 
-class machine : element {
+class machine : public element {
     int rate{0};
     int capacity{3};
     int output_count{0};
@@ -53,21 +53,31 @@ public:
     void add_input(buffer &buf)
     {   std::cout << "adding buffer of size: " << buf.get_size() << std::endl;
         this->inputs.emplace_back(buf);
+    } 
+    void update_state()
+    {
+        
     }
 };
 
 class discrete_event_sim
 {
-    private:
+private:
     int time{0};
     std::vector<element> elements;
 
+public:
     void update_sim(){
         for (auto &e : elements)
         {
             e.update_state();
         }
         ++time;
+    }
+
+    void add_element(element& e)
+    {
+        elements.emplace_back(e);
     }
 
 };
@@ -78,6 +88,18 @@ int main(){
     buffer b{5, 3, 1};
 
     a.add_input(b);
+
+    discrete_event_sim sim;
+    sim.add_element(a);
+    sim.add_element(b);
+
+    int time_steps = 1000;
+
+    for (int i{0}; i < time_steps; ++time_steps)
+    {
+        sim.update_sim();
+    }
+    
 
     return 0;
 }
