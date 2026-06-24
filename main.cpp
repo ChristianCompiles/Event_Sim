@@ -4,6 +4,8 @@
 #include <ctime>
 #include <variant>
 
+#define year 31536000
+
 class element
 {
 
@@ -46,8 +48,8 @@ class machine : public element {
     int capacity{3};
     int output_count{0};
 
-    std::vector<buffer*> inputs; //{0};
-    //std::vector<
+    std::vector<buffer*> inputs;
+    
 
 public:
     machine(int rt, int cap)
@@ -105,7 +107,7 @@ int main(){
     sim.add_element(a);
     sim.add_element(b);
 
-    int time_steps = 31536000;
+    int time_steps = year;
 
     for (int i{0}; i < time_steps; ++i)
     {
@@ -123,6 +125,5 @@ int main(){
     << std::chrono::duration<double, std::milli>(t_end - t_start).count()
     << " ms\n";
     
-
     return 0;
 }
