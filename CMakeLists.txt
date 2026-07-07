@@ -1,8 +1,8 @@
 cmake_minimum_required(VERSION 3.22)
 project(Sim)
-add_executable(sim_exe)
+add_executable(sim)
 
-target_sources(sim_exe
+target_sources(sim
   PRIVATE
     src/main.cpp
     src/buffer.cpp
