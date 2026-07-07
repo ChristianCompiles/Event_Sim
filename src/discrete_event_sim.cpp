@@ -8,7 +8,7 @@ void discrete_event_sim::update_sim(){
     }
     ++time;
 }
-void discrete_event_sim::add_element(element* e)
+void discrete_event_sim::add_element(std::shared_ptr<element> e)
 {
     elements.push_back(e);
 }

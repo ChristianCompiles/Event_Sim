@@ -8,7 +8,7 @@ machine::machine(int rt, int cap)
 
 machine::machine(){};
 
-void machine::add_input(buffer* buf)
+void machine::add_input(std::shared_ptr<buffer> buf)
 {   std::cout << "adding buffer of size: " << buf->get_size() << std::endl;
     this->inputs.push_back(buf);
 }

@@ -24,7 +24,7 @@ int buffer::get_prev_size(){
 
 void buffer::update_state(const int time)
 {
-    if (size == 0){buffer_empty = true;}
+    if (size == 0){buffer_empty = true;} // if buffer holds nothing, set flag so that if item is produced this time step, it will not be used.
     else {buffer_empty = false;}
     if (size +1 > capacity)
     {

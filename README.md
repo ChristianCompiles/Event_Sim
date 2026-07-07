@@ -1,4 +1,7 @@
-mkdir build
-cd build
-cmake ..
-make -j
+
+# Build Steps
+```
+mkdir build && cd build    
+cmake .. -DCMAKE_BUILD_TYPE=Debug  
+make -j  
+```

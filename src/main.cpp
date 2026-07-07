@@ -1,6 +1,7 @@
 #include <iostream>
 #include <chrono>
 #include <ctime>
+#include <memory>
 #include "../include/machine.h"
 #include "../include/buffer.h"
 #include "../include/discrete_event_sim.h"
@@ -12,8 +13,8 @@ int main(){
     // std::clock_t c_start = std::clock();
     // auto t_start = std::chrono::high_resolution_clock::now();
 
-    machine* a = new machine(1,1);
-    buffer* b = new buffer(0, 1, 100);
+    std::shared_ptr<machine> a(new machine(1,1));
+    std::shared_ptr<buffer>  b(new buffer(0, 1, 100));
 
     a->add_input(b);
 
