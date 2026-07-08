@@ -4,6 +4,7 @@ class element
 
 public:
     element(){};
-    virtual void update_state(const int time){};
     virtual ~element(){};
+    virtual void update_state(const int time){};
+    virtual void print_results(){};
 };

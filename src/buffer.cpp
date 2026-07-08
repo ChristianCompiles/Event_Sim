@@ -52,3 +52,7 @@ void buffer::dec_size()
     }
     --size;
 }
+
+void buffer::print_results(){
+    std::cout << "items buffered: " << items_buffered << std::endl;
+}

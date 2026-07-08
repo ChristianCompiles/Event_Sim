@@ -20,4 +20,5 @@ public:
     int get_items_buffered();
     bool get_buffer_empty();
     void dec_size();
+    void print_results() override;
 };

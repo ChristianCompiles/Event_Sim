@@ -47,3 +47,7 @@ int machine::get_output_count()
 {
     return output_count;
 }
+
+void machine::print_results(){
+    std::cout << "Items machined: " << output_count << std::endl;
+}

@@ -17,5 +17,7 @@ public:
     machine();
     void add_input(std::shared_ptr<buffer> buf);
     void update_state(const int time) override;
+    void print_results() override;
     int get_output_count();
+    
 };
