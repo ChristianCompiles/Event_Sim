@@ -10,12 +10,14 @@ class discrete_event_sim
 {
 private:
     int time{0};
+    bool sim_complete{false};
     std::vector<std::shared_ptr<element>> elements;
     std::clock_t c_start; 
     std::chrono::time_point<std::chrono::high_resolution_clock> t_start;
     std::clock_t c_end = std::clock();
     std::chrono::time_point<std::chrono::high_resolution_clock> t_end;
 
+    void pre_run_check();
     void update_sim();
 
 public:

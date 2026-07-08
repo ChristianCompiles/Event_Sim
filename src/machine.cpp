@@ -10,7 +10,7 @@ machine::machine(){};
 
 void machine::add_input(std::shared_ptr<buffer> buf)
 {   std::cout << "adding buffer of size: " << buf->get_size() << std::endl;
-    this->inputs.push_back(buf);
+    inputs.push_back(buf);
 }
 
 void machine::update_state(const int time)
@@ -40,6 +40,18 @@ void machine::update_state(const int time)
             i->dec_size();
             break;
         }
+    }
+}
+
+void machine::pre_run_check(bool& ready){
+
+    std::cout << "machine has this number of inputs: " << inputs.size() << std::endl;
+    if (inputs.empty())
+    {
+        ready = false;
+        std::cout << "Machine does not have inputs. ";
+        std::cout << "Will check remaining sim elements. Triggering exit.\n";
+        exit(0);
     }
 }
 

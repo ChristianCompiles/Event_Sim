@@ -17,6 +17,27 @@ void discrete_event_sim::update_sim(){
     ++time;
 }
 
+void discrete_event_sim::pre_run_check(){
+    
+    if (elements.empty()){
+        std::cout << "No elements added to sim. Exiting.\n";
+        exit(0);
+    }
+    
+    bool ready{true};
+
+    for (auto &e: elements)
+    {
+        e->pre_run_check(ready);
+    }
+
+    if (!ready){
+        std::cout << "Sim pre run check failed. Exiting.\n";
+        exit(0);
+    }
+
+}
+
 void discrete_event_sim::add_element(std::shared_ptr<element> e)
 {
     elements.push_back(e);
@@ -25,9 +46,12 @@ void discrete_event_sim::add_element(std::shared_ptr<element> e)
 void discrete_event_sim::run(int duration)
 {   
     if (duration < 0){
-        std::cout << "run time is less than zero. Exiting.";
+        std::cout << "run time is less than zero. Exiting.\n";
         exit(0);
     }
+    
+    pre_run_check();
+
     c_start = std::clock();
     t_start = std::chrono::high_resolution_clock::now();
     
@@ -41,9 +65,16 @@ void discrete_event_sim::run(int duration)
     t_end = std::chrono::high_resolution_clock::now();
     c_end = std::clock();
 
+    sim_complete = true;
 }
 
 void discrete_event_sim::print_results(){
+
+    if (!sim_complete){
+        std::cout << "Sim did not run. Cannot print results. Exiting.\n";
+        exit(0);
+    }
+
     std::cout << "CPU time: "
     << 1000.0 * (c_end - c_start) / CLOCKS_PER_SEC << " ms\n";
     std::cout << "Wall time: "
